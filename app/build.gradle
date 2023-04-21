@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.kjh.dietmanagement'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.kjh.dietmanagement"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -30,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -41,4 +44,14 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // nav
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+
+    // calendar
+    implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
+
+    // 달력 헤더 커스텀 라이브러리
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.1'
 }
