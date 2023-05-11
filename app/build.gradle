@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    // Navigation Component - Safe Args
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -54,4 +56,8 @@ dependencies {
 
     // 달력 헤더 커스텀 라이브러리
     implementation 'com.jakewharton.threetenabp:threetenabp:1.1.1'
+
+    // navigation component
+    implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
 }
