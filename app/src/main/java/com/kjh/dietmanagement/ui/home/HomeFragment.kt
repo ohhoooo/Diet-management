@@ -23,7 +23,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_home, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         return binding.root
     }
 
@@ -37,7 +37,7 @@ class HomeFragment : Fragment() {
             setDateSelected(CalendarDay.today(), true)
             // 달력의 날짜를 누르면 listFragment 로 이동
             setOnDateChangedListener { widget, date, selected ->
-                val action = HomeFragmentDirections.actionHomeFragmentToListFragment(getWeekday(date))
+                val action = HomeFragmentDirections.actionHomeFragmentToHomeDialogFragment(getWeekday(date))
                 findNavController().navigate(action)
             }
         }
