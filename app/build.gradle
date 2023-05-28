@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     // Navigation Component - Safe Args
     id 'androidx.navigation.safeargs.kotlin'
+    // kapt
+    id 'kotlin-kapt'
 }
 
 android {
@@ -60,4 +62,9 @@ dependencies {
     // navigation component
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
     implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
+
+    // room
+    implementation("androidx.room:room-runtime:2.5.0")
+    annotationProcessor("androidx.room:room-compiler:2.5.0")
+    kapt("androidx.room:room-compiler:2.5.0")
 }
