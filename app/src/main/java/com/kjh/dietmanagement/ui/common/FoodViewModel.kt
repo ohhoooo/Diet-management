@@ -5,10 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kjh.dietmanagement.model.Food
 
-class SharedViewModel : ViewModel() {
+class FoodViewModel : ViewModel() {
 
     private val _food = MutableLiveData<List<Food>>()
     val food: LiveData<List<Food>> = _food
+
+    fun setFood(food: List<Food>) {
+        _food.value = food
+    }
 
     fun addFood(food: Food) {
         _food.value = getFoods().apply { add(food) }

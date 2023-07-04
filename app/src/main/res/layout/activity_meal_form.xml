@@ -7,7 +7,7 @@
 
         <variable
             name="nutrient"
-            type="com.kjh.dietmanagement.model.NutrientTotals" />
+            type="com.kjh.dietmanagement.model.Food" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,6 +22,7 @@
             android:fillViewport="true"
             app:layout_constraintBottom_toTopOf="@id/bt_save"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -29,19 +30,58 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/bt_add_image"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_image"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="27dp"
-                    android:layout_marginEnd="25dp"
-                    android:text="사진 추가"
-                    android:textSize="24sp"
+                    android:layout_height="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:background="@drawable/background_rounded_white_grey01"/>
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/bt_add_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="26dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="@drawable/background_rounded_white_grey01"
+                        android:text="사진 추가"
+                        android:textSize="24sp"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/iv_food"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="26dp"
+                        android:layout_marginEnd="24dp"
+                        android:visibility="gone"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintDimensionRatio="w, 1:1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize16Percent" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/bt_delete"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:background="@drawable/icon_cancel"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginTop="32dp"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:id="@+id/tv_classification"
@@ -50,11 +90,11 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="30dp"
                     android:text="분류"
+                    android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/bt_add_image" />
+                    app:layout_constraintTop_toBottomOf="@id/layout_image" />
 
                 <RadioGroup
                     android:id="@+id/group_radio"
@@ -73,43 +113,43 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:layout_weight="1"
+                        android:background="@drawable/background_rounded_radio"
                         android:button="@null"
                         android:gravity="center"
                         android:text="아침"
-                        android:textSize="20sp"
-                        android:background="@drawable/background_rounded_radio"/>
+                        android:textSize="20sp" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:layout_weight="1"
+                        android:background="@drawable/background_rounded_radio"
                         android:button="@null"
                         android:gravity="center"
                         android:text="점심"
-                        android:textSize="20sp"
-                        android:background="@drawable/background_rounded_radio"/>
+                        android:textSize="20sp" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:layout_weight="1"
+                        android:background="@drawable/background_rounded_radio"
                         android:button="@null"
                         android:gravity="center"
                         android:text="저녁"
-                        android:textSize="20sp"
-                        android:background="@drawable/background_rounded_radio"/>
+                        android:textSize="20sp" />
 
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@drawable/background_rounded_radio"
                         android:button="@null"
                         android:gravity="center"
                         android:text="간식"
-                        android:textSize="20sp"
-                        android:background="@drawable/background_rounded_radio"/>
+                        android:textSize="20sp" />
                 </RadioGroup>
 
                 <TextView
@@ -119,11 +159,11 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="30dp"
                     android:text="영양성분"
+                    android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/group_radio"
-                    android:textColor="@color/black"/>
+                    app:layout_constraintTop_toBottomOf="@id/group_radio" />
 
                 <TextView
                     android:id="@+id/tv_calorie"
@@ -132,21 +172,21 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="10dp"
                     android:text="칼로리"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_nutrient"
-                    android:textColor="@color/black"/>
+                    app:layout_constraintTop_toBottomOf="@id/tv_nutrient" />
 
                 <TextView
                     android:id="@+id/tv_calorie_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
+                    android:text="@{nutrient.calorie}"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@id/tv_calorie"
                     app:layout_constraintTop_toTopOf="@id/tv_calorie"
-                    android:text="@{nutrient.calorie}"
-                    tools:text="0.0"/>
+                    tools:text="0.0" />
 
                 <TextView
                     android:id="@+id/tv_carbohydrate"
@@ -154,21 +194,21 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="119dp"
                     android:text="탄수화물"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@id/tv_calorie"
-                    app:layout_constraintTop_toTopOf="@id/tv_calorie"
-                    android:textColor="@color/black"/>
+                    app:layout_constraintTop_toTopOf="@id/tv_calorie" />
 
                 <TextView
                     android:id="@+id/tv_carbohydrate_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
+                    android:text="@{nutrient.carbohydrate}"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@id/tv_carbohydrate"
                     app:layout_constraintTop_toTopOf="@id/tv_calorie"
-                    android:text="@{nutrient.carbohydrate}"
-                    tools:text="0.0"/>
+                    tools:text="0.0" />
 
                 <TextView
                     android:id="@+id/tv_protein"
@@ -177,21 +217,21 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="30dp"
                     android:text="단백질"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_calorie"
-                    android:textColor="@color/black"/>
+                    app:layout_constraintTop_toBottomOf="@id/tv_calorie" />
 
                 <TextView
                     android:id="@+id/tv_protein_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
+                    android:text="@{nutrient.protein}"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@id/tv_protein"
                     app:layout_constraintTop_toTopOf="@id/tv_protein"
-                    android:text="@{nutrient.protein}"
-                    tools:text="0.0"/>
+                    tools:text="0.0" />
 
                 <TextView
                     android:id="@+id/tv_fat"
@@ -199,35 +239,35 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="119dp"
                     android:text="지방"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@id/tv_protein"
-                    app:layout_constraintTop_toTopOf="@id/tv_protein"
-                    android:textColor="@color/black"/>
+                    app:layout_constraintTop_toTopOf="@id/tv_protein" />
 
                 <TextView
                     android:id="@+id/tv_fat_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
+                    android:text="@{nutrient.fat}"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@id/tv_carbohydrate"
                     app:layout_constraintTop_toTopOf="@id/tv_protein"
-                    android:text="@{nutrient.fat}"
-                    tools:text="0.0"/>
+                    tools:text="0.0" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/bt_add_food"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
+                    android:layout_marginStart="24dp"
                     android:layout_marginTop="28dp"
-                    android:layout_marginEnd="25dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/background_rounded_white_grey01"
                     android:text="음식 추가하기"
                     android:textSize="24sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_protein"
-                    android:background="@drawable/background_rounded_white_grey01"/>
+                    app:layout_constraintTop_toBottomOf="@id/tv_protein" />
 
                 <TextView
                     android:id="@+id/tv_added_food"
@@ -236,11 +276,11 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="30dp"
                     android:text="추가한 음식"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/bt_add_food"
                     android:textColor="@color/black"
-                    android:textStyle="bold"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bt_add_food" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
@@ -259,12 +299,12 @@
             android:id="@+id/bt_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/background_white_grey"
             android:text="저장하기"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/scrollview"
-            android:background="@drawable/background_white_grey"/>
+            app:layout_constraintTop_toBottomOf="@id/scrollview" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
