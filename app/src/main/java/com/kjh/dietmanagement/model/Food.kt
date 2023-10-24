@@ -5,9 +5,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Food(
-    val name: String = "", // 음식 이름
-    var calorie: String = "0.0", // 칼로리
-    var carbohydrate: String = "0.0", // 탄수화물
-    var protein: String = "0.0", // 단백질
-    var fat: String = "0.0", // 지방
+    val name: String, // 음식 이름
+    val calorie: String, // 칼로리
+    val carbohydrate: String, // 탄수화물
+    val protein: String, // 단백질
+    val fat: String, // 지방
 ) : Parcelable

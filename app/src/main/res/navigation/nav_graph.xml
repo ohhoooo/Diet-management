@@ -9,23 +9,50 @@
         android:name="com.kjh.dietmanagement.ui.home.HomeFragment"
         android:label="fragment_food_diary">
         <action
-            android:id="@+id/action_homeFragment_to_listFragment"
-            app:destination="@id/listFragment" />
+            android:id="@+id/action_homeFragment_to_homeDialogFragment"
+            app:destination="@id/homeDialogFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/inputMealFragment"
-        android:name="com.kjh.dietmanagement.ui.inputmeal.InputMealFragment"
-        android:label="InputMealFragment" />
+
     <dialog
-        android:id="@+id/listFragment"
-        android:name="com.kjh.dietmanagement.ui.list.ListFragment"
-        android:label="ListFragment">
-        <action
-            android:id="@+id/action_listFragment_to_inputMealFragment"
-            app:destination="@id/inputMealFragment" />
+        android:id="@+id/homeDialogFragment"
+        android:name="com.kjh.dietmanagement.ui.homedialog.HomeDialogFragment"
+        android:label="HomeDialogFragment" >
         <argument
             android:name="weekday"
-            android:defaultValue="No Message"
             app:argType="string" />
+        <action
+            android:id="@+id/action_homeDialogFragment_to_mealFormFragment"
+            app:destination="@id/mealFormFragment" />
     </dialog>
+
+    <fragment
+        android:id="@+id/mealFormFragment"
+        android:name="com.kjh.dietmanagement.ui.mealform.MealFormFragment"
+        android:label="MealFormFragment" >
+        <action
+            android:id="@+id/action_mealFormFragment_to_photoDialogFragment"
+            app:destination="@id/photoDialogFragment" />
+        <action
+            android:id="@+id/action_mealFormFragment_to_foodSearchFragment"
+            app:destination="@id/foodSearchFragment" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/photoDialogFragment"
+        android:name="com.kjh.dietmanagement.ui.photodialog.PhotoDialogFragment"
+        android:label="PhotoDialogFragment" />
+
+    <fragment
+        android:id="@+id/foodSearchFragment"
+        android:name="com.kjh.dietmanagement.ui.foodsearch.FoodSearchFragment"
+        android:label="FoodSearchFragment" >
+        <action
+            android:id="@+id/action_foodSearchFragment_to_foodFormFragment"
+            app:destination="@id/foodFormFragment" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/foodFormFragment"
+        android:name="com.kjh.dietmanagement.ui.foodform.FoodFormFragment"
+        android:label="FoodFormFragment" />
 </navigation>

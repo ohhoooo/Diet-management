@@ -17,7 +17,7 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentPhotoDialogBinding
-import com.kjh.dietmanagement.ui.common.PhotoViewModel
+import com.kjh.dietmanagement.ui.common.viewmodel.PhotoViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
