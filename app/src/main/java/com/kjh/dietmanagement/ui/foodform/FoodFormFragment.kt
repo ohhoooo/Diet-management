@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentFoodFormBinding
@@ -16,7 +16,7 @@ import com.kjh.dietmanagement.ui.common.viewmodel.FoodViewModel
 class FoodFormFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentFoodFormBinding
-    private val viewModel: FoodViewModel by viewModels()
+    private val viewModel: FoodViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

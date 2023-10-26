@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentMealFormBinding
@@ -19,8 +19,8 @@ class MealFormFragment : Fragment(), OnClickInterface {
 
     private lateinit var adapter: MealFormAdapter
     private lateinit var binding: FragmentMealFormBinding
-    private val foodViewModel: FoodViewModel by viewModels()
-    private val photoViewModel: PhotoViewModel by viewModels()
+    private val foodViewModel: FoodViewModel by activityViewModels()
+    private val photoViewModel: PhotoViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,7 +52,6 @@ class MealFormFragment : Fragment(), OnClickInterface {
         // food
         foodViewModel.food.observe(viewLifecycleOwner) { foodList ->
             adapter.submitList(foodList)
-
             binding.nutrient = Food(
                 "",
                 foodList.sumOf { it.calorie.toDouble() }.toString(),
