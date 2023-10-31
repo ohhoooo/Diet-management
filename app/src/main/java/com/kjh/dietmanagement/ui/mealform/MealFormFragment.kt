@@ -1,5 +1,6 @@
 package com.kjh.dietmanagement.ui.mealform
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -36,19 +37,19 @@ class MealFormFragment : Fragment(), OnClickInterface {
 
         binding.lifecycleOwner = this.viewLifecycleOwner
 
-        setAdapter()
-        observeViewModel()
+        adapter()
+        observer()
         onClickButtons()
     }
 
     // adapter
-    private fun setAdapter() {
+    private fun adapter() {
         adapter = MealFormAdapter(this)
         binding.recyclerView.adapter = adapter
     }
 
-    // observe
-    private fun observeViewModel() {
+    // observer
+    private fun observer() {
         // food
         foodViewModel.food.observe(viewLifecycleOwner) { foodList ->
             adapter.submitList(foodList)
@@ -64,10 +65,16 @@ class MealFormFragment : Fragment(), OnClickInterface {
         // photo
         photoViewModel.photo.observe(viewLifecycleOwner) {
             with(binding) {
-                ivFood.setImageURI(it)
-                ivFood.visibility = View.VISIBLE
-                btDelete.visibility = View.VISIBLE
-                btAddImage.visibility = View.GONE
+                if(it == Uri.EMPTY) {
+                    ivFood.visibility = View.GONE
+                    btDelete.visibility = View.GONE
+                    btAddImage.visibility = View.VISIBLE
+                } else {
+                    ivFood.setImageURI(it)
+                    ivFood.visibility = View.VISIBLE
+                    btDelete.visibility = View.VISIBLE
+                    btAddImage.visibility = View.GONE
+                }
             }
         }
     }
@@ -89,15 +96,10 @@ class MealFormFragment : Fragment(), OnClickInterface {
         // 이미지 삭제
         binding.btDelete.setOnClickListener {
             photoViewModel.removePhoto()
-            with(binding) {
-                ivFood.visibility = View.GONE
-                btDelete.visibility = View.GONE
-                btAddImage.visibility = View.VISIBLE
-            }
         }
     }
 
-    // button click -> position item remove
+    // button click -> position food item remove
     override fun onClick(position: Int) {
         foodViewModel.removeFood(position)
     }

@@ -31,11 +31,11 @@ class HomeDialogFragment : BottomSheetDialogFragment() {
         binding.lifecycleOwner = this.viewLifecycleOwner
 
         binding.weekDay = args.weekday
-        onMoveButton()
+        onClickButton()
     }
 
     // MealFormFragment 로 이동
-    private fun onMoveButton() {
+    private fun onClickButton() {
         binding.btAdd.setOnClickListener {
             val action = HomeDialogFragmentDirections.actionHomeDialogFragmentToMealFormFragment()
             findNavController().navigate(action)

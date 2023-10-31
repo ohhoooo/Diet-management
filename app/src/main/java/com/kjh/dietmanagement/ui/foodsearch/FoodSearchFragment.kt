@@ -31,19 +31,19 @@ class FoodSearchFragment : Fragment(), OnClickInterface {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setAdapter()
-        observeViewModel()
+        adapter()
+        observer()
         onClickButtons()
     }
 
     // adapter
-    private fun setAdapter() {
+    private fun adapter() {
         adapter = FoodSearchAdapter(this)
         binding.recyclerView.adapter = adapter
     }
 
-    // observe
-    private fun observeViewModel() {
+    // observer
+    private fun observer() {
         viewModel.food.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }

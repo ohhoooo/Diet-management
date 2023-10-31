@@ -54,29 +54,24 @@ class PhotoDialogFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        onClickCameraButton()
-        onClickFileButton()
-        onClickCancelButton()
+        onClickButtons()
         getPhoto()
         getPermission()
     }
 
-    // 카메라 열기 버튼을 눌렀을 때
-    private fun onClickCameraButton() {
+    // button click
+    private fun onClickButtons() {
+        // 카메라 열기 버튼을 눌렀을 때
         binding.tvOpenCamera.setOnClickListener {
             requestCameraPermission.launch(cameraPermission)
         }
-    }
 
-    // 파일 열기 버튼을 눌렀을 때
-    private fun onClickFileButton() {
+        // 파일 열기 버튼을 눌렀을 때
         binding.tvOpenAlbum.setOnClickListener {
             requestFilePermission.launch(filePermissions)
         }
-    }
 
-    // 취소 버튼을 눌렀을 때
-    private fun onClickCancelButton() {
+        // 취소 버튼을 눌렀을 때
         binding.tvCancel.setOnClickListener {
             dismiss()
         }

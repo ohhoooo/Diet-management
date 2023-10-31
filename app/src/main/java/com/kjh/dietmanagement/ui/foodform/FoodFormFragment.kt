@@ -30,11 +30,11 @@ class FoodFormFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        onAddButtonClick()
+        onButtonClick()
     }
 
     // 추가 버튼 클릭
-    private fun onAddButtonClick() {
+    private fun onButtonClick() {
         with(binding) {
             btAdd.setOnClickListener {
                 if(!etFoodName.text.isNullOrBlank()) {
