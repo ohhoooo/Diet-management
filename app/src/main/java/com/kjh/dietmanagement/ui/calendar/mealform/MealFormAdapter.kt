@@ -1,4 +1,4 @@
-package com.kjh.dietmanagement.ui.mealform
+package com.kjh.dietmanagement.ui.calendar.mealform
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kjh.dietmanagement.databinding.ItemMealformBinding
 import com.kjh.dietmanagement.model.Food
-import com.kjh.dietmanagement.ui.common.FoodDiffCallback
-import com.kjh.dietmanagement.ui.common.OnClickInterface
+import com.kjh.dietmanagement.ui.calendar.common.FoodDiffCallback
+import com.kjh.dietmanagement.ui.calendar.common.OnClickInterface
 
 class MealFormAdapter(private val onClickListener: OnClickInterface) : ListAdapter<Food, MealFormAdapter.ViewHolder>(FoodDiffCallback()) {
 

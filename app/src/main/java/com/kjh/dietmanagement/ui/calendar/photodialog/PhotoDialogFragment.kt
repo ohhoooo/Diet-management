@@ -1,4 +1,4 @@
-package com.kjh.dietmanagement.ui.photodialog
+package com.kjh.dietmanagement.ui.calendar.photodialog
 
 import android.Manifest
 import android.content.ContentValues
@@ -17,7 +17,7 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentPhotoDialogBinding
-import com.kjh.dietmanagement.ui.common.viewmodel.PhotoViewModel
+import com.kjh.dietmanagement.ui.calendar.common.viewmodel.PhotoViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 

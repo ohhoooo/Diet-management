@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.kjh.dietmanagement.ui.home.HomeFragment"
+        android:name="com.kjh.dietmanagement.ui.calendar.home.HomeFragment"
         android:label="fragment_food_diary">
         <action
             android:id="@+id/action_homeFragment_to_homeDialogFragment"
@@ -32,7 +32,7 @@
 
     <dialog
         android:id="@+id/homeDialogFragment"
-        android:name="com.kjh.dietmanagement.ui.homedialog.HomeDialogFragment"
+        android:name="com.kjh.dietmanagement.ui.calendar.homedialog.HomeDialogFragment"
         android:label="HomeDialogFragment">
         <argument
             android:name="weekday"
@@ -44,7 +44,7 @@
 
     <fragment
         android:id="@+id/mealFormFragment"
-        android:name="com.kjh.dietmanagement.ui.mealform.MealFormFragment"
+        android:name="com.kjh.dietmanagement.ui.calendar.mealform.MealFormFragment"
         android:label="MealFormFragment">
         <action
             android:id="@+id/action_mealFormFragment_to_photoDialogFragment"
@@ -56,12 +56,12 @@
 
     <dialog
         android:id="@+id/photoDialogFragment"
-        android:name="com.kjh.dietmanagement.ui.photodialog.PhotoDialogFragment"
+        android:name="com.kjh.dietmanagement.ui.calendar.photodialog.PhotoDialogFragment"
         android:label="PhotoDialogFragment" />
 
     <fragment
         android:id="@+id/foodSearchFragment"
-        android:name="com.kjh.dietmanagement.ui.foodsearch.FoodSearchFragment"
+        android:name="com.kjh.dietmanagement.ui.calendar.foodsearch.FoodSearchFragment"
         android:label="FoodSearchFragment">
         <action
             android:id="@+id/action_foodSearchFragment_to_foodFormFragment"
@@ -70,7 +70,7 @@
 
     <dialog
         android:id="@+id/foodFormFragment"
-        android:name="com.kjh.dietmanagement.ui.foodform.FoodFormFragment"
+        android:name="com.kjh.dietmanagement.ui.calendar.foodform.FoodFormFragment"
         android:label="FoodFormFragment" />
 
     <fragment

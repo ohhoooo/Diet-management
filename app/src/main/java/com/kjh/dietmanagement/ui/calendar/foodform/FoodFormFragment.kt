@@ -1,4 +1,4 @@
-package com.kjh.dietmanagement.ui.foodform
+package com.kjh.dietmanagement.ui.calendar.foodform
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentFoodFormBinding
 import com.kjh.dietmanagement.model.Food
-import com.kjh.dietmanagement.ui.common.viewmodel.FoodViewModel
+import com.kjh.dietmanagement.ui.calendar.common.viewmodel.FoodViewModel
 
 class FoodFormFragment : BottomSheetDialogFragment() {
 

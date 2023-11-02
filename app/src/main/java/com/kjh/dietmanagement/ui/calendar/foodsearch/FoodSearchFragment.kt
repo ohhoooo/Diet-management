@@ -1,4 +1,4 @@
-package com.kjh.dietmanagement.ui.foodsearch
+package com.kjh.dietmanagement.ui.calendar.foodsearch
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,8 +10,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentFoodSearchBinding
-import com.kjh.dietmanagement.ui.common.viewmodel.FoodViewModel
-import com.kjh.dietmanagement.ui.common.OnClickInterface
+import com.kjh.dietmanagement.ui.calendar.common.viewmodel.FoodViewModel
+import com.kjh.dietmanagement.ui.calendar.common.OnClickInterface
 
 class FoodSearchFragment : Fragment(), OnClickInterface {
 

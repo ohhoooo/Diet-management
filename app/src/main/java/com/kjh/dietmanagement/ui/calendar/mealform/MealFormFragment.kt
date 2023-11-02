@@ -1,4 +1,4 @@
-package com.kjh.dietmanagement.ui.mealform
+package com.kjh.dietmanagement.ui.calendar.mealform
 
 import android.net.Uri
 import android.os.Bundle
@@ -12,9 +12,9 @@ import androidx.navigation.fragment.findNavController
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentMealFormBinding
 import com.kjh.dietmanagement.model.Food
-import com.kjh.dietmanagement.ui.common.viewmodel.FoodViewModel
-import com.kjh.dietmanagement.ui.common.OnClickInterface
-import com.kjh.dietmanagement.ui.common.viewmodel.PhotoViewModel
+import com.kjh.dietmanagement.ui.calendar.common.viewmodel.FoodViewModel
+import com.kjh.dietmanagement.ui.calendar.common.OnClickInterface
+import com.kjh.dietmanagement.ui.calendar.common.viewmodel.PhotoViewModel
 
 class MealFormFragment : Fragment(), OnClickInterface {
 

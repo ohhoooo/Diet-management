@@ -1,4 +1,4 @@
-package com.kjh.dietmanagement.ui.common.viewmodel
+package com.kjh.dietmanagement.ui.calendar.common.viewmodel
 
 import android.net.Uri
 import androidx.lifecycle.LiveData

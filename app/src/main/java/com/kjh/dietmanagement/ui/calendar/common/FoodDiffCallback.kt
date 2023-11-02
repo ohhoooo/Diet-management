@@ -1,4 +1,4 @@
-package com.kjh.dietmanagement.ui.common
+package com.kjh.dietmanagement.ui.calendar.common
 
 import androidx.recyclerview.widget.DiffUtil
 import com.kjh.dietmanagement.model.Food

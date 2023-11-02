@@ -9,8 +9,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.kjh.dietmanagement.databinding.ActivityMainBinding
-import com.kjh.dietmanagement.ui.common.viewmodel.FoodViewModel
-import com.kjh.dietmanagement.ui.common.viewmodel.PhotoViewModel
+import com.kjh.dietmanagement.ui.calendar.common.viewmodel.FoodViewModel
+import com.kjh.dietmanagement.ui.calendar.common.viewmodel.PhotoViewModel
 
 class MainActivity : AppCompatActivity() {
 

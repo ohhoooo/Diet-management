@@ -1,4 +1,4 @@
-package com.kjh.dietmanagement.ui.homedialog
+package com.kjh.dietmanagement.ui.calendar.homedialog
 
 import android.os.Bundle
 import android.view.LayoutInflater

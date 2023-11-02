@@ -1,4 +1,4 @@
-package com.kjh.dietmanagement.ui.home
+package com.kjh.dietmanagement.ui.calendar.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentHomeBinding
-
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.format.TitleFormatter
 import org.threeten.bp.LocalDate
