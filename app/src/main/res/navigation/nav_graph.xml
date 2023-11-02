@@ -64,4 +64,9 @@
         android:id="@+id/foodFormFragment"
         android:name="com.kjh.dietmanagement.ui.foodform.FoodFormFragment"
         android:label="FoodFormFragment" />
+
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.kjh.dietmanagement.ui.statistics.StatisticsFragment"
+        android:label="fragment_statistics" />
 </navigation>
