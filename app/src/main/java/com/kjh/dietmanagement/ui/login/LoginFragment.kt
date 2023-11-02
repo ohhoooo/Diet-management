@@ -32,8 +32,15 @@ class LoginFragment : Fragment() {
     }
 
     private fun onClickButton() {
+        // 로그인 버튼
         binding.tvLoginButton.setOnClickListener {
             val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+            findNavController().navigate(action)
+        }
+
+        // 회원 가입 버튼
+        binding.tvJoin.setOnClickListener {
+            val action = LoginFragmentDirections.actionLoginFragmentToJoinFragment()
             findNavController().navigate(action)
         }
     }

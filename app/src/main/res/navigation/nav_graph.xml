@@ -11,7 +11,15 @@
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_joinFragment"
+            app:destination="@id/joinFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/joinFragment"
+        android:name="com.kjh.dietmanagement.ui.login.JoinFragment"
+        android:label="JoinFragment" />
 
     <fragment
         android:id="@+id/homeFragment"
