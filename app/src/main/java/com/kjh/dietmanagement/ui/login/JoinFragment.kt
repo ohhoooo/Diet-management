@@ -89,6 +89,7 @@ class JoinFragment : Fragment() {
             return idMatcher.matches() && passwordMatcher.matches() && passwordVerificationMatcher.matches()
                     && nicknameMatcher.matches() && (rbMale.isChecked || rbFemale.isChecked) && etAge.text.toString().length == 8
                     && etTall.text.toString().isNotEmpty() && etCurrentWeight.text.toString().isNotEmpty() && etTargetWeight.text.toString().isNotEmpty()
+                    && etPassword.text.toString() == etPasswordVerification.text.toString()
         }
     }
 
