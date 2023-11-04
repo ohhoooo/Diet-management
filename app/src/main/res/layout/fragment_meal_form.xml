@@ -61,10 +61,10 @@
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="26dp"
                         android:layout_marginEnd="24dp"
-                        android:visibility="gone"
                         android:scaleType="centerCrop"
-                        app:layout_constraintDimensionRatio="w, 1:1"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintDimensionRatio="w, 1:1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -74,12 +74,12 @@
                         android:id="@+id/bt_delete"
                         android:layout_width="34dp"
                         android:layout_height="34dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="30dp"
+                        android:background="@drawable/icon_cancel"
                         android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:background="@drawable/icon_cancel"
-                        android:layout_marginEnd="30dp"
-                        android:layout_marginTop="32dp"/>
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
@@ -152,6 +152,62 @@
                 </RadioGroup>
 
                 <TextView
+                    android:id="@+id/tv_tall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:text="키(선택)"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/group_radio" />
+
+                <EditText
+                    android:id="@+id/et_tall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:hint="cm"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:paddingBottom="18dp"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_tall" />
+
+                <TextView
+                    android:id="@+id/tv_current_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="현재 체중(선택)"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_tall" />
+
+                <EditText
+                    android:id="@+id/et_current_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:hint="kg"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:paddingBottom="18dp"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_current_weight" />
+
+                <TextView
                     android:id="@+id/tv_nutrient"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -162,7 +218,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/group_radio" />
+                    app:layout_constraintTop_toBottomOf="@id/et_current_weight" />
 
                 <TextView
                     android:id="@+id/tv_calorie"
