@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         // 특정 fragment 들을 제외한 나머지 fragment 들의 bottom navigation bar 숨김 처리
         navController.addOnDestinationChangedListener { _, view, _ ->
-            if (view.id == R.id.homeFragment || view.id == R.id.statisticsFragment) {
+            if (view.id == R.id.homeFragment || view.id == R.id.statisticsFragment || view.id == R.id.rankingFragment) {
                 binding.bottomNavigationView.visibility = View.VISIBLE
             }else {
                 binding.bottomNavigationView.visibility = View.GONE

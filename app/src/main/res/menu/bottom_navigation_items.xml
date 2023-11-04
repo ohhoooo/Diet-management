@@ -12,4 +12,10 @@
         android:icon="@drawable/icon_statistics"
         android:title="통계"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/rankingFragment"
+        android:icon="@drawable/icon_ranking"
+        android:title="랭킹"
+        app:showAsAction="always" />
 </menu>

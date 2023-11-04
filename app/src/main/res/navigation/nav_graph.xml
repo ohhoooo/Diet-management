@@ -77,4 +77,9 @@
         android:id="@+id/statisticsFragment"
         android:name="com.kjh.dietmanagement.ui.statistics.StatisticsFragment"
         android:label="fragment_statistics" />
+
+    <fragment
+        android:id="@+id/rankingFragment"
+        android:name="com.kjh.dietmanagement.ui.ranking.RankingFragment"
+        android:label="RankingFragment" />
 </navigation>
