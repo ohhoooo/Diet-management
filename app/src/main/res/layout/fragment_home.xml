@@ -10,16 +10,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-            android:id="@+id/calendarView"
+        <TextView
+            android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="달력"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.02" />
+
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
             app:mcv_headerTextAppearance="@style/CalendarTitle"
             app:mcv_showOtherDates="all"
-            app:mcv_weekDayLabels="@array/custom_weekdays"
-            app:mcv_titleAnimationOrientation="horizontal"/>
+            app:mcv_titleAnimationOrientation="horizontal"
+            app:mcv_weekDayLabels="@array/custom_weekdays" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
