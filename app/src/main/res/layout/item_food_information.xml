@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="nutrient"
+            type="com.kjh.dietmanagement.model.Food" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@drawable/background_rounded_white_grey02"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_food"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="w, 1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize16Percent" />
+
+            <TextView
+                android:id="@+id/tv_meal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="점심"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/iv_food"
+                app:layout_constraintTop_toTopOf="@id/iv_food" />
+
+            <TextView
+                android:id="@+id/tv_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-8dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/icon_more"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_meal" />
+
+            <TextView
+                android:id="@+id/tv_calorie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="칼로리"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/iv_food"
+                app:layout_constraintTop_toBottomOf="@id/tv_meal" />
+
+            <TextView
+                android:id="@+id/tv_calorie_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@{nutrient.calorie}"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_calorie"
+                app:layout_constraintStart_toEndOf="@id/tv_calorie"
+                app:layout_constraintTop_toTopOf="@id/tv_calorie"
+                tools:text="0.0" />
+
+            <TextView
+                android:id="@+id/tv_carbohydrate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:text="탄수화물"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/tv_calorie"
+                app:layout_constraintTop_toTopOf="@id/tv_calorie" />
+
+            <TextView
+                android:id="@+id/tv_carbohydrate_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@{nutrient.carbohydrate}"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_calorie"
+                app:layout_constraintStart_toEndOf="@id/tv_carbohydrate"
+                app:layout_constraintTop_toTopOf="@id/tv_carbohydrate"
+                tools:text="0.0" />
+
+            <TextView
+                android:id="@+id/tv_protein"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="단백질"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/iv_food"
+                app:layout_constraintTop_toBottomOf="@id/tv_calorie" />
+
+            <TextView
+                android:id="@+id/tv_protein_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@{nutrient.protein}"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_protein"
+                app:layout_constraintStart_toEndOf="@id/tv_protein"
+                app:layout_constraintTop_toTopOf="@id/tv_protein"
+                tools:text="0.0" />
+
+            <TextView
+                android:id="@+id/tv_fat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="지방"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/tv_carbohydrate"
+                app:layout_constraintTop_toTopOf="@id/tv_protein" />
+
+            <TextView
+                android:id="@+id/tv_fat_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@{nutrient.fat}"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fat"
+                app:layout_constraintStart_toEndOf="@id/tv_carbohydrate"
+                app:layout_constraintTop_toTopOf="@id/tv_fat"
+                tools:text="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
