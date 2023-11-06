@@ -14,6 +14,7 @@ import com.kjh.dietmanagement.databinding.FragmentMealFormBinding
 import com.kjh.dietmanagement.model.Food
 import com.kjh.dietmanagement.ui.calendar.common.viewmodel.FoodViewModel
 import com.kjh.dietmanagement.ui.calendar.common.OnClickInterface
+import com.kjh.dietmanagement.ui.calendar.common.viewmodel.ClassificationViewModel
 import com.kjh.dietmanagement.ui.calendar.common.viewmodel.PhotoViewModel
 
 class MealFormFragment : Fragment(), OnClickInterface {
@@ -22,6 +23,7 @@ class MealFormFragment : Fragment(), OnClickInterface {
     private lateinit var binding: FragmentMealFormBinding
     private val foodViewModel: FoodViewModel by activityViewModels()
     private val photoViewModel: PhotoViewModel by activityViewModels()
+    private val classificationViewModel: ClassificationViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -75,6 +77,16 @@ class MealFormFragment : Fragment(), OnClickInterface {
                     btDelete.visibility = View.VISIBLE
                     btAddImage.visibility = View.GONE
                 }
+            }
+        }
+
+        // classification
+        classificationViewModel.classification.observe(viewLifecycleOwner) {
+            when (it) {
+                0 -> binding.rb0.isChecked = true
+                1 -> binding.rb1.isChecked = true
+                2 -> binding.rb2.isChecked = true
+                3 -> binding.rb3.isChecked = true
             }
         }
     }
