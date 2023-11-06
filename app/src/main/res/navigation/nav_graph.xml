@@ -10,10 +10,16 @@
         android:label="LoginFragment">
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/to_right"
+            app:exitAnim="@anim/from_left" />
         <action
             android:id="@+id/action_loginFragment_to_joinFragment"
-            app:destination="@id/joinFragment" />
+            app:destination="@id/joinFragment"
+            app:enterAnim="@anim/to_right"
+            app:exitAnim="@anim/from_left"
+            app:popEnterAnim="@anim/to_left"
+            app:popExitAnim="@anim/from_right" />
     </fragment>
 
     <fragment
@@ -39,7 +45,11 @@
             app:argType="string" />
         <action
             android:id="@+id/action_homeDialogFragment_to_mealFormFragment"
-            app:destination="@id/mealFormFragment" />
+            app:destination="@id/mealFormFragment"
+            app:enterAnim="@anim/to_right"
+            app:exitAnim="@anim/from_left"
+            app:popEnterAnim="@anim/to_left"
+            app:popExitAnim="@anim/from_right" />
     </dialog>
 
     <fragment
@@ -51,7 +61,11 @@
             app:destination="@id/photoDialogFragment" />
         <action
             android:id="@+id/action_mealFormFragment_to_foodSearchFragment"
-            app:destination="@id/foodSearchFragment" />
+            app:destination="@id/foodSearchFragment"
+            app:enterAnim="@anim/to_right"
+            app:exitAnim="@anim/from_left"
+            app:popEnterAnim="@anim/to_left"
+            app:popExitAnim="@anim/from_right" />
     </fragment>
 
     <dialog
