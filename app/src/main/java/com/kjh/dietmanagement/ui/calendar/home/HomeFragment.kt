@@ -1,5 +1,6 @@
 package com.kjh.dietmanagement.ui.calendar.home
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,7 +11,10 @@ import androidx.navigation.findNavController
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentHomeBinding
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.prolificinteractive.materialcalendarview.DayViewDecorator
+import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.prolificinteractive.materialcalendarview.format.TitleFormatter
+import com.prolificinteractive.materialcalendarview.spans.DotSpan
 import org.threeten.bp.LocalDate
 
 class HomeFragment : Fragment() {
@@ -42,6 +46,16 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(action)
             }
         }
+
+        // 테스트(점 찍기) 하기 위해 임의로 구현
+        val myDate1 = CalendarDay.from(2023, 11, 30)
+        val myDate2 = CalendarDay.from(2023, 11, 20)
+        val myDate3 = CalendarDay.from(2023, 11, 10)
+        val hashSet = HashSet<CalendarDay>()
+        hashSet.add(myDate1)
+        hashSet.add(myDate2)
+        hashSet.add(myDate3)
+        binding.calendarView.addDecorator(DayDisableDecorator(hashSet))
     }
 
     // Calendar 의 Header 가 표시되는 방법 Custom
@@ -82,5 +96,16 @@ class HomeFragment : Fragment() {
     // 월, 일, 요일을 문장으로 만들어서 반환
     private fun getWeekdayString(date: List<String>, weekDay: String): String {
         return "${date[1]}월 ${date[2]}일 ${weekDay}요일"
+    }
+
+    // 음식을 먹은 날짜에 점 표시 하는 클래스
+    inner class DayDisableDecorator(private var dates: HashSet<CalendarDay>) : DayViewDecorator {
+        override fun shouldDecorate(day: CalendarDay?): Boolean {
+            return dates.contains(day)
+        }
+
+        override fun decorate(view: DayViewFacade?) {
+            view?.addSpan(DotSpan(9F, Color.parseColor("#FF0000")))
+        }
     }
 }
