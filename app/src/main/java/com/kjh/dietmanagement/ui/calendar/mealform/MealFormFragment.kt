@@ -65,7 +65,7 @@ class MealFormFragment : Fragment(), OnClickInterface {
         // photo
         photoViewModel.photo.observe(viewLifecycleOwner) {
             with(binding) {
-                if(it == Uri.EMPTY) {
+                if (it == Uri.EMPTY) {
                     ivFood.visibility = View.GONE
                     btDelete.visibility = View.GONE
                     btAddImage.visibility = View.VISIBLE
@@ -91,6 +91,13 @@ class MealFormFragment : Fragment(), OnClickInterface {
         binding.btAddImage.setOnClickListener {
             val action = MealFormFragmentDirections.actionMealFormFragmentToPhotoDialogFragment()
             findNavController().navigate(action)
+        }
+
+        // 뒤로 가기
+        binding.ivArrowBack.setOnClickListener {
+            foodViewModel.resetFood()
+            photoViewModel.removePhoto()
+            findNavController().navigateUp()
         }
 
         // 이미지 삭제

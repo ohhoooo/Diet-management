@@ -10,11 +10,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentFoodSearchBinding
+import com.kjh.dietmanagement.model.Food
 import com.kjh.dietmanagement.ui.calendar.common.viewmodel.FoodViewModel
 import com.kjh.dietmanagement.ui.calendar.common.OnClickInterface
 
 class FoodSearchFragment : Fragment(), OnClickInterface {
 
+    private lateinit var foods: List<Food>
     private lateinit var adapter: FoodSearchAdapter
     private lateinit var binding: FragmentFoodSearchBinding
     private val viewModel: FoodViewModel by activityViewModels()
@@ -34,6 +36,9 @@ class FoodSearchFragment : Fragment(), OnClickInterface {
         adapter()
         observer()
         onClickButtons()
+
+        // 음식 리스트 상태 저장 -> 뒤로 가기 버튼 누를 때 반영
+        foods = viewModel.food.value ?: emptyList()
     }
 
     // adapter
@@ -60,6 +65,12 @@ class FoodSearchFragment : Fragment(), OnClickInterface {
         binding.btAddByYourself.setOnClickListener {
             val action = FoodSearchFragmentDirections.actionFoodSearchFragmentToFoodFormFragment()
             findNavController().navigate(action)
+        }
+
+        // 뒤로 가기
+        binding.ivArrowBack.setOnClickListener {
+            viewModel.setFood(foods)
+            findNavController().navigateUp()
         }
     }
 
