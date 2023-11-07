@@ -11,12 +11,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentFoodFormBinding
 import com.kjh.dietmanagement.model.data.Food
-import com.kjh.dietmanagement.viewmodel.FoodViewModel
+import com.kjh.dietmanagement.viewmodel.MainActivityViewModel
 
 class FoodFormFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentFoodFormBinding
-    private val viewModel: FoodViewModel by activityViewModels()
+    private val viewModel: MainActivityViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

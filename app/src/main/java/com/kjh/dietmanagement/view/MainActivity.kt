@@ -10,16 +10,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.ActivityMainBinding
-import com.kjh.dietmanagement.viewmodel.ClassificationViewModel
-import com.kjh.dietmanagement.viewmodel.FoodViewModel
-import com.kjh.dietmanagement.viewmodel.PhotoViewModel
+import com.kjh.dietmanagement.viewmodel.MainActivityViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val foodViewModel: FoodViewModel by viewModels()
-    private val photoViewModel: PhotoViewModel by viewModels()
-    private val classificationViewModel: ClassificationViewModel by viewModels()
+    private val viewModel: MainActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

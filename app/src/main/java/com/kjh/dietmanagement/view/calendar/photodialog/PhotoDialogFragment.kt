@@ -17,7 +17,7 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentPhotoDialogBinding
-import com.kjh.dietmanagement.viewmodel.PhotoViewModel
+import com.kjh.dietmanagement.viewmodel.MainActivityViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -29,7 +29,7 @@ class PhotoDialogFragment : BottomSheetDialogFragment() {
     private lateinit var requestFilePermission: ActivityResultLauncher<Array<String>>
     private lateinit var pictureUri: Uri
     private lateinit var binding: FragmentPhotoDialogBinding
-    private val viewModel: PhotoViewModel by activityViewModels()
+    private val viewModel: MainActivityViewModel by activityViewModels()
     private val cameraPermission = Manifest.permission.CAMERA
     private val filePermissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         arrayOf(

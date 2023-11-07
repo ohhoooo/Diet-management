@@ -11,15 +11,15 @@ import androidx.navigation.fragment.findNavController
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentFoodSearchBinding
 import com.kjh.dietmanagement.model.data.Food
-import com.kjh.dietmanagement.viewmodel.FoodViewModel
 import com.kjh.dietmanagement.view.calendar.common.OnClickInterface
+import com.kjh.dietmanagement.viewmodel.MainActivityViewModel
 
 class FoodSearchFragment : Fragment(), OnClickInterface {
 
     private lateinit var foods: List<Food>
     private lateinit var adapter: FoodSearchAdapter
     private lateinit var binding: FragmentFoodSearchBinding
-    private val viewModel: FoodViewModel by activityViewModels()
+    private val viewModel: MainActivityViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

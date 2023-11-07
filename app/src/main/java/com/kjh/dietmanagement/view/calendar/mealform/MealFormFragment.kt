@@ -12,18 +12,14 @@ import androidx.navigation.fragment.findNavController
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentMealFormBinding
 import com.kjh.dietmanagement.model.data.Food
-import com.kjh.dietmanagement.viewmodel.FoodViewModel
 import com.kjh.dietmanagement.view.calendar.common.OnClickInterface
-import com.kjh.dietmanagement.viewmodel.ClassificationViewModel
-import com.kjh.dietmanagement.viewmodel.PhotoViewModel
+import com.kjh.dietmanagement.viewmodel.MainActivityViewModel
 
 class MealFormFragment : Fragment(), OnClickInterface {
 
     private lateinit var adapter: MealFormAdapter
     private lateinit var binding: FragmentMealFormBinding
-    private val foodViewModel: FoodViewModel by activityViewModels()
-    private val photoViewModel: PhotoViewModel by activityViewModels()
-    private val classificationViewModel: ClassificationViewModel by activityViewModels()
+    private val viewModel: MainActivityViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +49,7 @@ class MealFormFragment : Fragment(), OnClickInterface {
     // observer
     private fun observer() {
         // food
-        foodViewModel.food.observe(viewLifecycleOwner) { foodList ->
+        viewModel.food.observe(viewLifecycleOwner) { foodList ->
             adapter.submitList(foodList)
             binding.nutrient = Food(
                 "",
@@ -65,7 +61,7 @@ class MealFormFragment : Fragment(), OnClickInterface {
         }
 
         // photo
-        photoViewModel.photo.observe(viewLifecycleOwner) {
+        viewModel.photo.observe(viewLifecycleOwner) {
             with(binding) {
                 if (it == Uri.EMPTY) {
                     ivFood.visibility = View.GONE
@@ -77,16 +73,6 @@ class MealFormFragment : Fragment(), OnClickInterface {
                     btDelete.visibility = View.VISIBLE
                     btAddImage.visibility = View.GONE
                 }
-            }
-        }
-
-        // classification
-        classificationViewModel.classification.observe(viewLifecycleOwner) {
-            when (it) {
-                0 -> binding.rb0.isChecked = true
-                1 -> binding.rb1.isChecked = true
-                2 -> binding.rb2.isChecked = true
-                3 -> binding.rb3.isChecked = true
             }
         }
     }
@@ -107,19 +93,19 @@ class MealFormFragment : Fragment(), OnClickInterface {
 
         // 뒤로 가기
         binding.ivArrowBack.setOnClickListener {
-            foodViewModel.resetFood()
-            photoViewModel.removePhoto()
+            viewModel.resetFood()
+            viewModel.removePhoto()
             findNavController().navigateUp()
         }
 
         // 이미지 삭제
         binding.btDelete.setOnClickListener {
-            photoViewModel.removePhoto()
+            viewModel.removePhoto()
         }
     }
 
     // button click -> position food item remove
     override fun onClick(position: Int) {
-        foodViewModel.removeFood(position)
+        viewModel.removeFood(position)
     }
 }
