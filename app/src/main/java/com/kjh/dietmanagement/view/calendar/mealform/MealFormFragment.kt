@@ -53,10 +53,10 @@ class MealFormFragment : Fragment(), OnClickInterface {
             adapter.submitList(foodList)
             binding.nutrient = Food(
                 "",
-                foodList.sumOf { it.calorie.toDouble() }.toString(),
-                foodList.sumOf { it.carbohydrate.toDouble() }.toString(),
-                foodList.sumOf { it.protein.toDouble() }.toString(),
-                foodList.sumOf { it.fat.toDouble() }.toString()
+                foodList.sumOf { it.calorie },
+                foodList.sumOf { it.carbohydrate },
+                foodList.sumOf { it.protein },
+                foodList.sumOf { it.fat }
             )
         }
 

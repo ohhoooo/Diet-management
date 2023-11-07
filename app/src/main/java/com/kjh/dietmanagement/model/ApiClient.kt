@@ -1,7 +1,9 @@
 package com.kjh.dietmanagement.model
 
+import com.kjh.dietmanagement.model.data.Food
 import com.kjh.dietmanagement.model.data.Join
 import com.kjh.dietmanagement.model.data.Login
+import com.kjh.dietmanagement.model.data.ResponseFood
 import com.kjh.dietmanagement.model.data.ResponseJoin
 import com.kjh.dietmanagement.model.data.ResponseLogin
 import retrofit2.Call
@@ -18,6 +20,10 @@ interface ApiClient {
     // 로그인
     @POST("/user/login")
     fun loginUser(@Body login: Login): Call<ResponseLogin>
+
+    // 음식 직접 추가
+    @POST("/food/add")
+    fun registerFood(@Body food: Food): Call<ResponseFood>
 
     // base Url
     companion object {

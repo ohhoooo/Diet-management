@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="26dp"
-                android:text="@{food.calorie}"
+                android:text="@{String.valueOf(food.calorie)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/container_food"
                 android:layout_marginStart="200dp"
