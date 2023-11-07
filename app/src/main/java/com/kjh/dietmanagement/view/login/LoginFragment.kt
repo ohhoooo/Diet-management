@@ -1,25 +1,25 @@
 package com.kjh.dietmanagement.view.login
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentLoginBinding
 import com.kjh.dietmanagement.model.data.Login
-import com.kjh.dietmanagement.model.data.ResponseLogin
-import com.kjh.dietmanagement.model.ApiClient
-import retrofit2.Call
-import retrofit2.Response
+import com.kjh.dietmanagement.view.common.ViewModelFactory
+import com.kjh.dietmanagement.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
+    private val viewModel: LoginViewModel by viewModels { ViewModelFactory() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,29 +35,34 @@ class LoginFragment : Fragment() {
 
         binding.lifecycleOwner = this.viewLifecycleOwner
 
+        observer()
         onClickButton()
+    }
+
+    // observer
+    private fun observer() {
+        viewModel.responseString.observe(viewLifecycleOwner) {
+            when (it) {
+                "로그인 성공" -> {
+                    Toast.makeText(requireContext(), "로그인 성공 하였습니다.", Toast.LENGTH_SHORT).show()
+                    val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+                    findNavController().navigate(action)
+                }
+                "로그인 실패" -> {
+                    Toast.makeText(requireContext(), "로그인 실패 하였습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     private fun onClickButton() {
         // 로그인 버튼
         binding.tvLoginButton.setOnClickListener {
-            ApiClient.create().loginUser(Login(binding.etId.text.toString(), binding.etPassword.text.toString())).enqueue(object : retrofit2.Callback<ResponseLogin> {
-                override fun onResponse(call: Call<ResponseLogin>, response: Response<ResponseLogin>) {
-                    if (response.isSuccessful) {
-                        Log.d("Response Yes: ", response.body().toString())
-                        Toast.makeText(requireContext(), "로그인 성공 하였습니다.", Toast.LENGTH_SHORT).show()
-                        val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-                        findNavController().navigate(action)
-                    } else {
-                        Log.d("Response NO: ", response.body()?.message.toString())
-                        Toast.makeText(requireContext(), "로그인 실패 하였습니다.", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                override fun onFailure(call: Call<ResponseLogin>, t: Throwable) {
-                    Log.d("Response onFailure: ", t.localizedMessage)
-                    Toast.makeText(requireContext(), "로그인 실패 하였습니다.", Toast.LENGTH_SHORT).show()
-                }
-            })
+            lifecycleScope.launchWhenCreated {
+                viewModel.loginUser(
+                    Login(binding.etId.text.toString(), binding.etPassword.text.toString())
+                )
+            }
         }
 
         // 회원 가입 버튼
