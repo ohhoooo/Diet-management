@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kjh.dietmanagement.databinding.ItemFoodsearchBinding
 import com.kjh.dietmanagement.model.data.Food
-import com.kjh.dietmanagement.view.calendar.common.FoodDiffCallback
-import com.kjh.dietmanagement.view.calendar.common.OnClickInterface
+import com.kjh.dietmanagement.view.common.FoodDiffCallback
+import com.kjh.dietmanagement.view.common.OnClickInterface
 
 class FoodSearchAdapter(private val onClickListener: OnClickInterface) : ListAdapter<Food, FoodSearchAdapter.ViewHolder>(
     FoodDiffCallback()

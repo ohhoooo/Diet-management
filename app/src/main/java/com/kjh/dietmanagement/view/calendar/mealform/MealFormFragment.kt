@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentMealFormBinding
 import com.kjh.dietmanagement.model.data.Food
-import com.kjh.dietmanagement.view.calendar.common.OnClickInterface
+import com.kjh.dietmanagement.view.common.OnClickInterface
 import com.kjh.dietmanagement.viewmodel.MainActivityViewModel
 
 class MealFormFragment : Fragment(), OnClickInterface {

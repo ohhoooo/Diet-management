@@ -1,4 +1,4 @@
-package com.kjh.dietmanagement.view.calendar.common
+package com.kjh.dietmanagement.view.common
 
 interface OnClickInterface {
     fun onClick(position: Int)
