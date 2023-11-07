@@ -69,8 +69,8 @@ class JoinFragment : Fragment() {
             ApiClient.create().joinUser(Join(
                 binding.etId.text.toString(), binding.etNickname.text.toString(),
                 binding.etPassword.text.toString(), if (binding.rbMale.isChecked) "남" else "여",
-                binding.etAge.text.toString(), binding.etCurrentWeight.text.toString().toInt(),
-                binding.etTall.text.toString().toInt(), binding.etTargetWeight.text.toString().toInt(),
+                binding.etAge.text.toString(), binding.etCurrentWeight.text.toString().toDouble(),
+                binding.etTall.text.toString().toDouble(), binding.etTargetWeight.text.toString().toDouble(),
             )).enqueue(object : retrofit2.Callback<ResponseJoin> {
                 override fun onResponse(call: Call<ResponseJoin>, response: Response<ResponseJoin>) {
                     if (response.isSuccessful) {

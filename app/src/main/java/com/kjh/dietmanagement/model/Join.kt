@@ -8,9 +8,9 @@ data class Join(
     @SerializedName("password") val password: String,
     @SerializedName("gender") val gender: String,
     @SerializedName("birth") val birth: String,
-    @SerializedName("weight") val weight: Int,
-    @SerializedName("height") val height: Int,
-    @SerializedName("goal_w") val goalW: Int
+    @SerializedName("weight") val weight: Double,
+    @SerializedName("height") val height: Double,
+    @SerializedName("goal_w") val goalW: Double
 )
 
 data class ResponseJoin (
