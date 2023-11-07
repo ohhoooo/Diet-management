@@ -3,6 +3,7 @@ package com.kjh.dietmanagement.ui.login
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentJoinBinding
+import com.kjh.dietmanagement.model.Join
+import com.kjh.dietmanagement.model.ResponseJoin
+import com.kjh.dietmanagement.network.ApiClient
+import retrofit2.Call
+import retrofit2.Response
 import java.util.regex.Pattern
 
 class JoinFragment : Fragment() {
@@ -55,14 +61,33 @@ class JoinFragment : Fragment() {
         // 여자 성별 버튼
         binding.rbFemale.setOnClickListener { joinButtonEnabled() }
 
-        // 회원 가입 완료 버튼
-        binding.tvJoinButton.setOnClickListener {
-            Toast.makeText(requireContext(), "회원가입을 완료하였습니다.", Toast.LENGTH_SHORT).show()
-            findNavController().navigateUp()
-        }
-
         // 뒤로 가기 버튼
         binding.ivBackButton.setOnClickListener { findNavController().navigateUp() }
+
+        // 회원 가입 완료 버튼
+        binding.tvJoinButton.setOnClickListener {
+            ApiClient.create().joinUser(Join(
+                binding.etId.text.toString(), binding.etNickname.text.toString(),
+                binding.etPassword.text.toString(), if (binding.rbMale.isChecked) "남" else "여",
+                binding.etAge.text.toString(), binding.etCurrentWeight.text.toString().toInt(),
+                binding.etTall.text.toString().toInt(), binding.etTargetWeight.text.toString().toInt(),
+            )).enqueue(object : retrofit2.Callback<ResponseJoin> {
+                override fun onResponse(call: Call<ResponseJoin>, response: Response<ResponseJoin>) {
+                    if (response.isSuccessful) {
+                        Log.d("Response Yes: ", response.body().toString())
+                        Toast.makeText(requireContext(), "회원가입에 성공 하였습니다.", Toast.LENGTH_SHORT).show()
+                        findNavController().navigateUp()
+                    } else {
+                        Log.d("Response NO: ", response.body()?.message.toString())
+                        Toast.makeText(requireContext(), "회원가입에 실패 하였습니다.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                override fun onFailure(call: Call<ResponseJoin>, t: Throwable) {
+                    Log.d("Response onFailure: ", t.localizedMessage)
+                    Toast.makeText(requireContext(), "회원가입에 실패 하였습니다.", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
     }
 
     // 회원 가입 버튼 활성화 여부
