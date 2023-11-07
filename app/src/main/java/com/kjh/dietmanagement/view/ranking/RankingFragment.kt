@@ -1,4 +1,4 @@
-package com.kjh.dietmanagement.ui.ranking
+package com.kjh.dietmanagement.view.ranking
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -24,5 +24,7 @@ class RankingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.lifecycleOwner = this.viewLifecycleOwner
     }
 }
