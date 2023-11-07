@@ -6,7 +6,7 @@
     <data>
         <variable
             name="food"
-            type="com.kjh.dietmanagement.model.Food" />
+            type="com.kjh.dietmanagement.model.data.Food" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

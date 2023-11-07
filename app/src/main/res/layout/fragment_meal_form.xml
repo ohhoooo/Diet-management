@@ -7,11 +7,11 @@
 
         <variable
             name="nutrient"
-            type="com.kjh.dietmanagement.model.Food" />
+            type="com.kjh.dietmanagement.model.data.Food" />
 
         <variable
             name="viewModel"
-            type="com.kjh.dietmanagement.ui.calendar.common.viewmodel.ClassificationViewModel" />
+            type="com.kjh.dietmanagement.viewmodel.ClassificationViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
