@@ -13,7 +13,7 @@ import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentLoginBinding
 import com.kjh.dietmanagement.model.data.Login
 import com.kjh.dietmanagement.model.data.ResponseLogin
-import com.kjh.dietmanagement.model.repository.ApiClient
+import com.kjh.dietmanagement.model.ApiClient
 import retrofit2.Call
 import retrofit2.Response
 

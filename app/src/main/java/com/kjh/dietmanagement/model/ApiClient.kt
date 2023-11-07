@@ -1,4 +1,4 @@
-package com.kjh.dietmanagement.model.repository
+package com.kjh.dietmanagement.model
 
 import com.kjh.dietmanagement.model.data.Join
 import com.kjh.dietmanagement.model.data.Login

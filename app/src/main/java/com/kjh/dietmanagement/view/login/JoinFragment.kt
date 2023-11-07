@@ -15,7 +15,7 @@ import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentJoinBinding
 import com.kjh.dietmanagement.model.data.Join
 import com.kjh.dietmanagement.model.data.ResponseJoin
-import com.kjh.dietmanagement.model.repository.ApiClient
+import com.kjh.dietmanagement.model.ApiClient
 import retrofit2.Call
 import retrofit2.Response
 import java.util.regex.Pattern
