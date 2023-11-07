@@ -14,6 +14,9 @@ class MainActivityViewModel : ViewModel() {
     private val _photo = MutableLiveData<Uri>()
     val photo: LiveData<Uri> = _photo
 
+    private val _token = MutableLiveData<String>()
+    val token: LiveData<String> = _token
+
     fun addFood(food: Food) {
         _food.value = getFoods().apply { add(food) }
     }
@@ -41,5 +44,9 @@ class MainActivityViewModel : ViewModel() {
 
     fun removePhoto() {
         _photo.value = Uri.EMPTY
+    }
+
+    fun setToken(token: String) {
+        _token.value = token
     }
 }

@@ -13,11 +13,15 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     private val _responseString = MutableLiveData<String>()
     val responseString: LiveData<String> = _responseString
 
+    private val _token = MutableLiveData<String>()
+    val token: LiveData<String> = _token
+
     // 로그인
     fun loginUser(login: Login) {
         viewModelScope.launch {
-            loginRepository.loginUser(login) { response ->
+            loginRepository.loginUser(login) { response, token ->
                 _responseString.value = response
+                if (token != null) _token.value = token
             }
         }
     }
