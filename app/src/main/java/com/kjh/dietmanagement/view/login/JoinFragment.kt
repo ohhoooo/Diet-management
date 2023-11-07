@@ -3,26 +3,26 @@ package com.kjh.dietmanagement.view.login
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentJoinBinding
 import com.kjh.dietmanagement.model.data.Join
-import com.kjh.dietmanagement.model.data.ResponseJoin
-import com.kjh.dietmanagement.model.ApiClient
-import retrofit2.Call
-import retrofit2.Response
+import com.kjh.dietmanagement.view.common.ViewModelFactory
+import com.kjh.dietmanagement.viewmodel.JoinViewModel
 import java.util.regex.Pattern
 
 class JoinFragment : Fragment() {
 
     private lateinit var binding: FragmentJoinBinding
+    private val viewModel: JoinViewModel by viewModels { ViewModelFactory() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +37,7 @@ class JoinFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         init()
+        observer()
         onClickButton()
     }
 
@@ -54,6 +55,25 @@ class JoinFragment : Fragment() {
         }
     }
 
+    // observer
+    private fun observer() {
+        // 로그인
+        viewModel.responseString.observe(viewLifecycleOwner) {
+            when (it) {
+                "응답 성공" -> {
+                    Toast.makeText(requireContext(), "회원가입 성공 하였습니다.", Toast.LENGTH_SHORT).show()
+                    findNavController().navigateUp()
+                }
+                "응답 실패" -> {
+                    Toast.makeText(requireContext(), "응답 실패 하였습니다.", Toast.LENGTH_SHORT).show()
+                }
+                "통신 실패" -> {
+                    Toast.makeText(requireContext(), "통신 실패 하였습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
     private fun onClickButton() {
         // 남자 성별 버튼
         binding.rbMale.setOnClickListener { joinButtonEnabled() }
@@ -66,28 +86,16 @@ class JoinFragment : Fragment() {
 
         // 회원 가입 완료 버튼
         binding.tvJoinButton.setOnClickListener {
-            ApiClient.create().joinUser(
-                Join(
-                binding.etId.text.toString(), binding.etNickname.text.toString(),
-                binding.etPassword.text.toString(), if (binding.rbMale.isChecked) "남" else "여",
-                binding.etAge.text.toString(), binding.etCurrentWeight.text.toString().toDouble(),
-                binding.etTall.text.toString().toDouble(), binding.etTargetWeight.text.toString().toDouble(),
-            )).enqueue(object : retrofit2.Callback<ResponseJoin> {
-                override fun onResponse(call: Call<ResponseJoin>, response: Response<ResponseJoin>) {
-                    if (response.isSuccessful) {
-                        Log.d("Response Yes: ", response.body().toString())
-                        Toast.makeText(requireContext(), "회원가입에 성공 하였습니다.", Toast.LENGTH_SHORT).show()
-                        findNavController().navigateUp()
-                    } else {
-                        Log.d("Response NO: ", response.body()?.message.toString())
-                        Toast.makeText(requireContext(), "회원가입에 실패 하였습니다.", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                override fun onFailure(call: Call<ResponseJoin>, t: Throwable) {
-                    Log.d("Response onFailure: ", t.localizedMessage)
-                    Toast.makeText(requireContext(), "회원가입에 실패 하였습니다.", Toast.LENGTH_SHORT).show()
-                }
-            })
+            lifecycleScope.launchWhenCreated {
+                viewModel.joinUser(
+                    Join(
+                        binding.etId.text.toString(), binding.etNickname.text.toString(),
+                        binding.etPassword.text.toString(), if (binding.rbMale.isChecked) "남" else "여",
+                        binding.etAge.text.toString(), binding.etCurrentWeight.text.toString().toDouble(),
+                        binding.etTall.text.toString().toDouble(), binding.etTargetWeight.text.toString().toDouble(),
+                    )
+                )
+            }
         }
     }
 
