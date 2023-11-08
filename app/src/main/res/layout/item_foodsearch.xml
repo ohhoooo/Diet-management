@@ -16,27 +16,28 @@
 
         <TextView
             android:id="@+id/tv_food_name"
-            android:layout_width="70dp"
+            android:layout_width="90dp"
             android:layout_height="30dp"
+            android:background="@drawable/background_rounded_green02"
+            android:gravity="center"
+            android:maxLines="1"
             android:text="@{food.name}"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:textSize="16sp"
-            tools:text="치킨"
-            android:background="@drawable/background_rounded_green02"
-            android:textColor="@color/black"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            tools:text="치킨" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bt_delete"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:background="@drawable/icon_cancel"
             android:minWidth="0dp"
             android:minHeight="0dp"
             app:layout_constraintStart_toEndOf="@id/tv_food_name"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/icon_cancel"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
