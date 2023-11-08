@@ -17,3 +17,10 @@ data class ResponseFood(
     @SerializedName("message") val message: String,
     @SerializedName("success") val success: String,
 )
+
+data class ResponseFoods(
+    @SerializedName("code") val code: Int,
+    @SerializedName("isSuccess") val isSuccess: Boolean,
+    @SerializedName("message") val message: String,
+    @SerializedName("result") val result: List<Food>,
+)

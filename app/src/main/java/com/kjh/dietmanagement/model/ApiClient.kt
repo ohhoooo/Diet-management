@@ -5,6 +5,7 @@ import com.kjh.dietmanagement.model.data.Join
 import com.kjh.dietmanagement.model.data.Login
 import com.kjh.dietmanagement.model.data.Rank
 import com.kjh.dietmanagement.model.data.ResponseFood
+import com.kjh.dietmanagement.model.data.ResponseFoods
 import com.kjh.dietmanagement.model.data.ResponseJoin
 import com.kjh.dietmanagement.model.data.ResponseLogin
 import okhttp3.OkHttpClient
@@ -14,6 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface ApiClient {
     // 회원 가입
@@ -27,6 +29,10 @@ interface ApiClient {
     // 음식 직접 추가
     @POST("/food/add")
     fun registerFood(@Body food: Food): Call<ResponseFood>
+
+    // 음식 검색
+    @GET("/food/search")
+    fun searchFoods(@Query("q") q: String): Call<ResponseFoods>
 
     // 랭킹 조회
     @GET("/user/ranking/day")
