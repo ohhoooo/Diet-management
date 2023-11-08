@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="rank"
+            type="com.kjh.dietmanagement.model.data.Rank" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,12 +62,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
-                android:text="본인 닉네임"
+                android:text="@{rank.userName}"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.3"
+                app:layout_constraintHorizontal_bias="0.15"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="본인 닉네임" />
@@ -75,15 +78,14 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_rank_rounded_small"
                 android:padding="8dp"
-                android:text="등수"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.79"
+                app:layout_constraintHorizontal_bias="0.6"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="등수" />
+                tools:text="@{String.valueOf(rank.userRanking) + '등'}" />
 
             <TextView
                 android:id="@+id/tv_my_percent"
@@ -91,15 +93,14 @@
                 android:layout_height="0dp"
                 android:background="@drawable/background_rank_rounded_small"
                 android:padding="8dp"
-                android:text="10%"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@id/tv_my_rank"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.95"
+                app:layout_constraintHorizontal_bias="0.9"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_my_rank"
-                tools:text="10%" />
+                tools:text="@{String.valueOf(rank.percentage) + '%'}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
