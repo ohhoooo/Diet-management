@@ -7,22 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentLoginBinding
 import com.kjh.dietmanagement.model.data.Login
+import com.kjh.dietmanagement.view.common.Application
 import com.kjh.dietmanagement.view.common.ViewModelFactory
 import com.kjh.dietmanagement.viewmodel.LoginViewModel
-import com.kjh.dietmanagement.viewmodel.MainActivityViewModel
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private val viewModel: LoginViewModel by viewModels { ViewModelFactory() }
-    private val activityViewModel: MainActivityViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,7 +58,7 @@ class LoginFragment : Fragment() {
 
         // 토큰
         viewModel.token.observe(viewLifecycleOwner) {
-            activityViewModel.setToken(it)
+            Application.preferences.setString("token", it)
         }
     }
 
