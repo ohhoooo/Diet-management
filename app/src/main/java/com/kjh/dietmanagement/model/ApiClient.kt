@@ -10,8 +10,10 @@ import com.kjh.dietmanagement.model.data.ResponseFoods
 import com.kjh.dietmanagement.model.data.ResponseHomeDialog
 import com.kjh.dietmanagement.model.data.ResponseJoin
 import com.kjh.dietmanagement.model.data.ResponseLogin
+import com.kjh.dietmanagement.model.data.ResponseMealDate
 import com.kjh.dietmanagement.model.data.ResponseMealForm
 import com.kjh.dietmanagement.model.data.ResponseRemoveMeal
+import com.kjh.dietmanagement.model.data.ResponseStatistics
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -30,6 +32,10 @@ interface ApiClient {
     // 로그인
     @POST("/user/login")
     fun loginUser(@Body login: Login): Call<ResponseLogin>
+
+    // 먹은 날짜 조회
+    @GET("/get/mealcheck")
+    fun getDate(): Call<ResponseMealDate>
 
     // 식단 조회
     @GET("/get/meals")
@@ -52,6 +58,10 @@ interface ApiClient {
     // 음식 검색
     @GET("/food/search")
     fun searchFoods(@Query("q") q: String): Call<ResponseFoods>
+
+    // 통계 조회
+    @GET("/statistic/all")
+    fun getStatistics(): Call<ResponseStatistics>
 
     // 랭킹 조회
     @GET("/user/ranking/day")

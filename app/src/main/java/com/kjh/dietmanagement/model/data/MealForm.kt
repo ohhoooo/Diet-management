@@ -15,3 +15,9 @@ data class ResponseMealForm(
     @SerializedName("message") val message: String,
     @SerializedName("success") val success: String,
 )
+
+data class ResponseMealDate(
+    @SerializedName("message") val message: String,
+    @SerializedName("success") val success: Int,
+    @SerializedName("mealcheck") val mealCheck: List<String>,
+)

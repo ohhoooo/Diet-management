@@ -6,16 +6,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentHomeBinding
+import com.kjh.dietmanagement.model.ApiClient
+import com.kjh.dietmanagement.model.data.ResponseMealDate
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.prolificinteractive.materialcalendarview.format.TitleFormatter
 import com.prolificinteractive.materialcalendarview.spans.DotSpan
 import org.threeten.bp.LocalDate
+import retrofit2.Call
+import retrofit2.Response
 
 class HomeFragment : Fragment() {
 
@@ -47,15 +52,31 @@ class HomeFragment : Fragment() {
             }
         }
 
-        // 테스트(점 찍기) 하기 위해 임의로 구현
-        val myDate1 = CalendarDay.from(2023, 11, 30)
-        val myDate2 = CalendarDay.from(2023, 11, 20)
-        val myDate3 = CalendarDay.from(2023, 11, 10)
-        val hashSet = HashSet<CalendarDay>()
-        hashSet.add(myDate1)
-        hashSet.add(myDate2)
-        hashSet.add(myDate3)
-        binding.calendarView.addDecorator(DayDisableDecorator(hashSet))
+        ApiClient.create().getDate().enqueue(object : retrofit2.Callback<ResponseMealDate> {
+            override fun onResponse(
+                call: Call<ResponseMealDate>,
+                response: Response<ResponseMealDate>
+            ) {
+                if (response.isSuccessful) {
+                    val list = response.body()?.mealCheck
+                    val hashSet = HashSet<CalendarDay>()
+                    if (list != null) {
+                        for (i in list) {
+                            val date = CalendarDay.from(i.substring(0,4).toInt(), i.substring(5,7).toInt(), i.substring(8,10).toInt())
+                            hashSet.add(date)
+                        }
+                        binding.calendarView.addDecorator(DayDisableDecorator(hashSet))
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "날짜 조회 실패하였습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseMealDate>, t: Throwable) {
+                Toast.makeText(requireContext(), "네트워크 연결이 실패하였습니다.", Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 
     // Calendar 의 Header 가 표시되는 방법 Custom

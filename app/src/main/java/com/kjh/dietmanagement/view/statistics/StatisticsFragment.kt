@@ -1,25 +1,34 @@
 package com.kjh.dietmanagement.view.statistics
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.android.material.tabs.TabLayout
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentStatisticsBinding
+import com.kjh.dietmanagement.view.common.ViewModelFactory
+import com.kjh.dietmanagement.viewmodel.StatisticsViewModel
 
 class StatisticsFragment : Fragment() {
 
     private lateinit var binding: FragmentStatisticsBinding
+    private val viewModel: StatisticsViewModel by viewModels { ViewModelFactory() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,16 +39,89 @@ class StatisticsFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("ResourceType")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observer()
         onClickButtons()
-        initChart()
-        prepareChartData(createChartData(), binding.lineChart)
+
+
+
+        // 통계 조회
+        lifecycleScope.launchWhenCreated {
+            viewModel.getStatistics()
+        }
+
+
+    }
+
+    // observer
+    private fun observer() {
+        // 통계
+        viewModel.responseStatistics.observe(viewLifecycleOwner) {
+            binding.rbWeight.isChecked = true
+            Toast.makeText(requireContext(), "통계 조회에 성공 하였습니다.", Toast.LENGTH_SHORT).show()
+        }
+
+        // 오류 메시지
+        viewModel.message.observe(viewLifecycleOwner) {
+            when (it) {
+                "응답 실패" -> {
+                    Toast.makeText(requireContext(), "응답에 실패 하였습니다.", Toast.LENGTH_SHORT).show()
+                }
+                "연결 실패" -> {
+                    Toast.makeText(requireContext(), "연결에 실패 하였습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun onClickButtons() {
+        // 탭 버튼
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                when (tab.position) {
+                    0 -> {
+                        createChartData(0, binding.groupRadio.checkedRadioButtonId)
+                    }
+                    1 -> {
+                        createChartData(1, binding.groupRadio.checkedRadioButtonId)
+                    }
+                    2 -> {
+                        createChartData(2, binding.groupRadio.checkedRadioButtonId)
+                    }
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) { }
+            override fun onTabReselected(tab: TabLayout.Tab?) { }
+        })
+
+        // 라디오 버튼
+        binding.groupRadio.setOnCheckedChangeListener { _, id ->
+            when (id) {
+                R.id.rb_weight -> {
+                    createChartData(binding.tabLayout.selectedTabPosition, R.id.rb_weight)
+                }
+                R.id.rb_calorie -> {
+                    createChartData(binding.tabLayout.selectedTabPosition, R.id.rb_calorie)
+                }
+                R.id.rb_carbohydrates -> {
+                    createChartData(binding.tabLayout.selectedTabPosition, R.id.rb_carbohydrates)
+                }
+                R.id.rb_protein -> {
+                    createChartData(binding.tabLayout.selectedTabPosition, R.id.rb_protein)
+                }
+                R.id.rb_fat -> {
+                    createChartData(binding.tabLayout.selectedTabPosition, R.id.rb_fat)
+                }
+            }
+        }
     }
 
     // 차트 설정
-    private fun initChart() {
+    private fun initChart(y: Int) {
         // 차트 전체 설정
         binding.lineChart.apply {
             axisRight.isEnabled = true // 짝대기 사용 여부
@@ -75,7 +157,7 @@ class StatisticsFragment : Fragment() {
             setDrawGridLines(false) // 배경 그리드 라인 세팅
             position = XAxis.XAxisPosition.BOTTOM // x축 데이터 표시 위치
             granularity = 1f // x축 데이터 표시 간격
-            textSize = 14f
+            textSize = 12f
             textColor = Color.rgb(118, 118, 118)
             spaceMin = 0.3f // Chart 맨 왼쪽 간격 띄우기
             spaceMax = 0.3f // Chart 맨 오른쪽 간격 띄우기
@@ -88,7 +170,7 @@ class StatisticsFragment : Fragment() {
             setDrawAxisLine(false)
             axisLineWidth = 2f
             axisMinimum = 0f // 최솟값
-            axisMaximum = 5.0f//RANGE.get(0).get(range) as Float // 최댓값
+            axisMaximum = y.toFloat()//RANGE.get(0).get(range) as Float // 최댓값
             granularity = 1.0f//RANGE.get(1).get(range) as Float
         }
 
@@ -99,55 +181,71 @@ class StatisticsFragment : Fragment() {
             setDrawAxisLine(false)
             axisLineWidth = 2f
             axisMinimum = 0f // 최솟값
-            axisMaximum = 5.0f//RANGE.get(0).get(range) as Float // 최댓값
+            axisMaximum = y.toFloat()//5.0f//RANGE.get(0).get(range) as Float // 최댓값
             granularity = 1.0f//RANGE.get(1).get(range) as Float
         }
 
-        /*
-        // XAxis에 원하는 String 설정하기 (날짜)
+        // 아래 선에 원하는 String 설정
         binding.lineChart.xAxis.valueFormatter = object : ValueFormatter() {
             override fun getFormattedValue(value: Float): String {
-                return LABEL.get(range).get(value.toInt())
+                Log.d("3t3531451242", value.toString().substring(2, 4) + "/" + value.toString().substring(4, 6))
+                return value.toString().substring(2, 4) + "/" + value.toString().substring(4, 6)
             }
         }
-         */
     }
 
     // 데이터 생성
-    private fun createChartData(): LineData {
+    private fun createChartData(tab: Int, rb: Int) {
         val entry1 = ArrayList<Entry>() // 앱1
         val entry2 = ArrayList<Entry>() // 앱2
         val chartData = LineData()
 
-        // 랜덤 데이터 추출
-        for (i in 0..6) {
-            val val1 = (Math.random() * 5).toFloat() // 앱1 값
-            val val2 = (Math.random() * 5).toFloat() // 앱2 값
-            entry1.add(Entry(i.toFloat(), val1))
-            entry2.add(Entry(i.toFloat(), val2))
+        val dataType = when (rb) {
+            2131296682 -> viewModel.responseStatistics.value?.result?.weight
+            2131296676 -> viewModel.responseStatistics.value?.result?.kcal
+            2131296677 -> viewModel.responseStatistics.value?.result?.tan
+            2131296681 -> viewModel.responseStatistics.value?.result?.dan
+            else -> viewModel.responseStatistics.value?.result?.ji
+        }
+
+        val dataDate = when (tab) {
+            0 -> dataType?.daily
+            1 -> dataType?.weekly
+            else -> dataType?.monthly
+        }
+
+        val recommend = dataType?.recommend
+        val yaxis = dataType?.yaxis
+
+        // 데이터 삽입
+        if (dataDate != null) {
+            for(i in dataDate) {
+                val date = (i.date.substring(2,4) + i.date.substring(5,7) + i.date.substring(8,10)).toFloat()
+                entry1.add(Entry(date, i.data.toFloat()))
+                entry2.add(Entry(date, recommend?.toFloat()!!))
+            }
         }
 
         // 본인 데이터 추이
-        val lineDataSet1 = LineDataSet(entry1, "응애1")
-        chartData.addDataSet(lineDataSet1)
-        lineDataSet1.lineWidth = 3f
-        lineDataSet1.circleRadius = 6f
-        lineDataSet1.setDrawValues(false)
-        lineDataSet1.setDrawCircleHole(true)
-        lineDataSet1.setDrawCircles(true)
-        lineDataSet1.setDrawValues(true)
-        lineDataSet1.setDrawHorizontalHighlightIndicator(false)
-        lineDataSet1.setDrawHighlightIndicators(false)
-        lineDataSet1.color = Color.rgb(255, 155, 155)
-        lineDataSet1.setCircleColor(Color.rgb(255, 155, 155))
+        val lineDataSet1 = LineDataSet(entry1, "나").apply {
+            lineWidth = 3f
+            circleRadius = 6f
+            setDrawCircleHole(true)
+            setDrawCircles(true)
+            setDrawValues(true)
+            setDrawHorizontalHighlightIndicator(false)
+            valueTextSize = 11.0F
+            setDrawHighlightIndicators(false)
+            color = Color.rgb(255, 155, 155)
+            setCircleColor(Color.rgb(255, 155, 155))
+        }
 
         // 목표 데이터
-        val lineDataSet2 = LineDataSet(entry2, "응애2")
-        chartData.addDataSet(lineDataSet2)
-        lineDataSet2.apply {
+        val lineDataSet2 = LineDataSet(entry2, "추천").apply {
             lineWidth = 3f
             circleRadius = 6f
             setDrawValues(true)
+            valueTextSize = 11.0F
             setDrawCircleHole(true)
             setDrawCircles(true)
             setDrawHorizontalHighlightIndicator(false)
@@ -155,56 +253,23 @@ class StatisticsFragment : Fragment() {
             color = Color.rgb(178, 223, 138)
             setCircleColor(Color.rgb(178, 223, 138))
         }
-        chartData.setValueTextSize(10f) // 점 위의 텍스트 크기 조정
-        return chartData
-    }
 
-    // 차트에 데이터 반영
-    private fun prepareChartData(data: LineData, lineChart: LineChart) {
-        lineChart.data = data // LineData 전달
-        lineChart.invalidate() // LineChart 갱신해 데이터 표시
-    }
+        chartData.addDataSet(lineDataSet1)
+        chartData.addDataSet(lineDataSet2)
 
-    private fun onClickButtons() {
-        // 탭 버튼
-        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                when (tab.position) {
-                    0 -> {
-                        prepareChartData(createChartData(), binding.lineChart)
-                    }
-                    1 -> {
-                        prepareChartData(createChartData(), binding.lineChart)
-                    }
-                    2 -> {
-                        prepareChartData(createChartData(), binding.lineChart)
-                    }
-                }
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) { }
-            override fun onTabReselected(tab: TabLayout.Tab?) { }
-        })
-
-        // 라디오 버튼
-        binding.groupRadio.setOnCheckedChangeListener { _, id ->
-            when (id) {
-                R.id.rb_weight -> {
-                    prepareChartData(createChartData(), binding.lineChart)
-                }
-                R.id.rb_calorie -> {
-                    prepareChartData(createChartData(), binding.lineChart)
-                }
-                R.id.rb_carbohydrates -> {
-                    prepareChartData(createChartData(), binding.lineChart)
-                }
-                R.id.rb_protein -> {
-                    prepareChartData(createChartData(), binding.lineChart)
-                }
-                R.id.rb_fat -> {
-                    prepareChartData(createChartData(), binding.lineChart)
-                }
+        // 아래 선에 원하는 String 설정
+        binding.lineChart.xAxis.valueFormatter = object : ValueFormatter() {
+            override fun getFormattedValue(value: Float): String {
+                Log.d("qweqwewqeqweqw", value.toString())
+                Log.d("qweqwewqeqweqw", value.toString().substring(2, 4) + "/" + value.toString().substring(4, 6))
+                return value.toString().substring(2, 4) + "/" + value.toString().substring(4, 6)
             }
         }
+        initChart(yaxis!!)
+        Log.d("sfasfsfdffsafaf", chartData.dataSets.toString())
+
+
+        binding.lineChart.data = chartData
+        binding.lineChart.invalidate()
     }
 }

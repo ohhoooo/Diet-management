@@ -10,6 +10,7 @@ import com.kjh.dietmanagement.model.repository.JoinRepository
 import com.kjh.dietmanagement.model.repository.LoginRepository
 import com.kjh.dietmanagement.model.repository.MealFormRepository
 import com.kjh.dietmanagement.model.repository.RankingRepository
+import com.kjh.dietmanagement.model.repository.StatisticsRepository
 import com.kjh.dietmanagement.model.source.FoodFormDataSource
 import com.kjh.dietmanagement.model.source.FoodSearchDataSource
 import com.kjh.dietmanagement.model.source.HomeDialogDataSource
@@ -17,6 +18,7 @@ import com.kjh.dietmanagement.model.source.JoinDataSource
 import com.kjh.dietmanagement.model.source.LoginDataSource
 import com.kjh.dietmanagement.model.source.MealFormDataSource
 import com.kjh.dietmanagement.model.source.RankingDataSource
+import com.kjh.dietmanagement.model.source.StatisticsDataSource
 import com.kjh.dietmanagement.viewmodel.FoodFormViewModel
 import com.kjh.dietmanagement.viewmodel.FoodSearchViewModel
 import com.kjh.dietmanagement.viewmodel.HomeDialogViewModel
@@ -24,6 +26,7 @@ import com.kjh.dietmanagement.viewmodel.JoinViewModel
 import com.kjh.dietmanagement.viewmodel.LoginViewModel
 import com.kjh.dietmanagement.viewmodel.MealFormViewModel
 import com.kjh.dietmanagement.viewmodel.RankingViewModel
+import com.kjh.dietmanagement.viewmodel.StatisticsViewModel
 
 class ViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -51,6 +54,10 @@ class ViewModelFactory : ViewModelProvider.Factory {
             modelClass.isAssignableFrom(FoodFormViewModel::class.java) -> {
                 val repository = FoodFormRepository(FoodFormDataSource(ApiClient.create()))
                 FoodFormViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(StatisticsViewModel::class.java) -> {
+                val repository = StatisticsRepository(StatisticsDataSource(ApiClient.create()))
+                StatisticsViewModel(repository) as T
             }
             modelClass.isAssignableFrom(RankingViewModel::class.java) -> {
                 val repository = RankingRepository(RankingDataSource(ApiClient.create()))
