@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -38,30 +39,57 @@ class HomeDialogFragment : BottomSheetDialogFragment() {
         binding.weekDay = args.weekday.substring(6)
         binding.lifecycleOwner = this.viewLifecycleOwner
         onClickButton()
-        observer()
+
+        val date = args.weekday.substring(2..3) + args.weekday.substring(6..7) + args.weekday.substring(10..11)
+
+        observer(date)
 
         lifecycleScope.launch {
-            viewModel.getMeals(
-                args.weekday.substring(2..3) + args.weekday.substring(6..7) + args.weekday.substring(10..11)
-            )
+            viewModel.getMeals(date)
         }
     }
 
     // observer
-    private fun observer() {
+    private fun observer(date: String) {
         // 식단
         viewModel.responseMeal.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), "응답 성공 하였습니다.", Toast.LENGTH_SHORT).show()
-            val adapter = HomeDialogAdapter {
-
+            val adapter = HomeDialogAdapter { type, foodName ->
+                AlertDialog.Builder(requireContext())
+                    .setTitle("정말로 삭제하시겠습니까?")
+                    .setPositiveButton("네") { _, _ ->
+                        lifecycleScope.launch {
+                            viewModel.removeMeal(date, type, foodName)
+                        }
+                    }
+                    .setNegativeButton("아니오") { dialog, _ ->
+                        dialog.cancel()
+                    }
+                    .create()
+                    .show()
             }
             binding.recyclerView.adapter = adapter
             adapter.submitList(it.mealData)
         }
 
-        // 메세지
+        // 식단 메세지
         viewModel.messageCheck.observe(viewLifecycleOwner) {
             when (it) {
+                "응답 실패" -> {
+                    Toast.makeText(requireContext(), "식단 정보가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
+                }
+                "연결 실패" -> {
+                    Toast.makeText(requireContext(), "연결 실패 하였습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        // 삭제 메세지
+        viewModel.messageRemove.observe(viewLifecycleOwner) {
+            when (it) {
+                "응답 성공" -> {
+                    Toast.makeText(requireContext(), "성공적으로 삭제 하였습니다.", Toast.LENGTH_SHORT).show()
+                    dialog?.cancel()
+                }
                 "응답 실패" -> {
                     Toast.makeText(requireContext(), "응답 실패 하였습니다.", Toast.LENGTH_SHORT).show()
                 }
@@ -70,7 +98,7 @@ class HomeDialogFragment : BottomSheetDialogFragment() {
                 }
             }
         }
-    }
+     }
 
     // MealFormFragment 로 이동
     private fun onClickButton() {

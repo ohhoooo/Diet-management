@@ -16,6 +16,9 @@ class HomeDialogViewModel(private val homeDialogRepository: HomeDialogRepository
     private val _messageCheck = MutableLiveData<String>()
     val messageCheck: LiveData<String> = _messageCheck
 
+    private val _messageRemove = MutableLiveData<String>()
+    val messageRemove: LiveData<String> = _messageRemove
+
     // 식단 조회
     fun getMeals(date: String) {
         viewModelScope.launch {
@@ -29,6 +32,25 @@ class HomeDialogViewModel(private val homeDialogRepository: HomeDialogRepository
                     }
                     "연결 실패" -> {
                         _messageCheck.value = "연결 실패"
+                    }
+                }
+            }
+        }
+    }
+
+    // 식단 삭제
+    fun removeMeal(date: String, type: String, name: String) {
+        viewModelScope.launch {
+            homeDialogRepository.removeMeal(date, type, name) { response, message ->
+                when (message) {
+                    "응답 성공" -> {
+                        _messageRemove.value = "응답 성공"
+                    }
+                    "응답 실패" -> {
+                        _messageRemove.value = "응답 실패"
+                    }
+                    "연결 실패" -> {
+                        _messageRemove.value = "응답 실패"
                     }
                 }
             }

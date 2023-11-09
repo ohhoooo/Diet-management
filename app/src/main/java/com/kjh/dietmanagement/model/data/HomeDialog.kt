@@ -17,3 +17,8 @@ data class ResponseHomeDialog(
     @SerializedName("success") val success : Int,
     @SerializedName("meal_data") val mealData : List<HomeDialog>
 )
+
+data class ResponseRemoveMeal(
+    @SerializedName("message") val message: String,
+    @SerializedName("success") val success: Int,
+)

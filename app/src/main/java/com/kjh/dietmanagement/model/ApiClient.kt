@@ -11,11 +11,13 @@ import com.kjh.dietmanagement.model.data.ResponseHomeDialog
 import com.kjh.dietmanagement.model.data.ResponseJoin
 import com.kjh.dietmanagement.model.data.ResponseLogin
 import com.kjh.dietmanagement.model.data.ResponseMealForm
+import com.kjh.dietmanagement.model.data.ResponseRemoveMeal
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -34,6 +36,10 @@ interface ApiClient {
     fun getMeals(@Query("eat_date") date: String): Call<ResponseHomeDialog>
 
     // 식단 삭제
+    @DELETE("/user/deletemeals")
+    fun removeMeal(@Query("eat_date") date: String,
+                   @Query("meal_type") type: String,
+                   @Query("food_name") name: String): Call<ResponseRemoveMeal>
 
     // 식단 저장
     @POST("/user/addmeal")

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kjh.dietmanagement.databinding.ItemFoodInformationBinding
 import com.kjh.dietmanagement.model.data.HomeDialog
 
-class HomeDialogAdapter(private val callback: () -> Unit) : ListAdapter<HomeDialog, HomeDialogAdapter.ViewHolder>(HomeDialogDiffCallback()) {
+class HomeDialogAdapter(private val callback: (String, String) -> Unit) : ListAdapter<HomeDialog, HomeDialogAdapter.ViewHolder>(HomeDialogDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemFoodInformationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -23,7 +23,9 @@ class HomeDialogAdapter(private val callback: () -> Unit) : ListAdapter<HomeDial
         fun bind(item: HomeDialog) {
             with(binding) {
                 nutrient = item
-                callback()
+                binding.tvRemove.setOnClickListener {
+                    callback(item.mealType, item.foodName)
+                }
                 executePendingBindings()
             }
         }
