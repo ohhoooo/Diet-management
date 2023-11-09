@@ -7,6 +7,7 @@ import com.kjh.dietmanagement.model.data.MealForm
 import com.kjh.dietmanagement.model.data.Rank
 import com.kjh.dietmanagement.model.data.ResponseFood
 import com.kjh.dietmanagement.model.data.ResponseFoods
+import com.kjh.dietmanagement.model.data.ResponseHomeDialog
 import com.kjh.dietmanagement.model.data.ResponseJoin
 import com.kjh.dietmanagement.model.data.ResponseLogin
 import com.kjh.dietmanagement.model.data.ResponseMealForm
@@ -29,6 +30,8 @@ interface ApiClient {
     fun loginUser(@Body login: Login): Call<ResponseLogin>
 
     // 식단 조회
+    @GET("/get/meals")
+    fun getMeals(@Query("eat_date") date: String): Call<ResponseHomeDialog>
 
     // 식단 삭제
 

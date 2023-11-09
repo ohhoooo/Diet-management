@@ -7,12 +7,14 @@
 
         <variable
             name="nutrient"
-            type="com.kjh.dietmanagement.model.data.Food" />
+            type="com.kjh.dietmanagement.model.data.HomeDialog" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -46,7 +48,7 @@
                 app:layout_constraintTop_toTopOf="@id/iv_food" />
 
             <TextView
-                android:id="@+id/tv_more"
+                android:id="@+id/tv_remove"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-8dp"
@@ -63,7 +65,7 @@
                 android:layout_marginTop="10dp"
                 android:text="칼로리"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@id/iv_food"
                 app:layout_constraintTop_toBottomOf="@id/tv_meal" />
 
@@ -72,8 +74,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="@{String.valueOf(nutrient.calorie)}"
-                android:textSize="14sp"
+                android:text="@{String.valueOf(nutrient.kcal)}"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@id/tv_calorie"
                 app:layout_constraintStart_toEndOf="@id/tv_calorie"
                 app:layout_constraintTop_toTopOf="@id/tv_calorie"
@@ -86,7 +88,7 @@
                 android:layout_marginStart="80dp"
                 android:text="탄수화물"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@id/tv_calorie"
                 app:layout_constraintTop_toTopOf="@id/tv_calorie" />
 
@@ -95,8 +97,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="@{String.valueOf(nutrient.carbohydrate)}"
-                android:textSize="14sp"
+                android:text="@{String.valueOf(nutrient.tan)}"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@id/tv_calorie"
                 app:layout_constraintStart_toEndOf="@id/tv_carbohydrate"
                 app:layout_constraintTop_toTopOf="@id/tv_carbohydrate"
@@ -110,7 +112,7 @@
                 android:layout_marginTop="10dp"
                 android:text="단백질"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@id/iv_food"
                 app:layout_constraintTop_toBottomOf="@id/tv_calorie" />
 
@@ -119,8 +121,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="@{String.valueOf(nutrient.protein)}"
-                android:textSize="14sp"
+                android:text="@{String.valueOf(nutrient.dan)}"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@id/tv_protein"
                 app:layout_constraintStart_toEndOf="@id/tv_protein"
                 app:layout_constraintTop_toTopOf="@id/tv_protein"
@@ -132,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:text="지방"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@id/tv_carbohydrate"
                 app:layout_constraintTop_toTopOf="@id/tv_protein" />
 
@@ -141,12 +143,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="@{String.valueOf(nutrient.fat)}"
-                android:textSize="14sp"
+                android:text="@{String.valueOf(nutrient.ji)}"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@id/tv_fat"
                 app:layout_constraintStart_toEndOf="@id/tv_carbohydrate"
                 app:layout_constraintTop_toTopOf="@id/tv_fat"
                 tools:text="0.0" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:maxLength="15"
+                android:maxLines="1"
+                android:text="@{String.valueOf(nutrient.foodName)}"
+                android:textColor="@color/grey02"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="@id/tv_protein"
+                app:layout_constraintTop_toBottomOf="@id/tv_protein" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
