@@ -3,11 +3,13 @@ package com.kjh.dietmanagement.model
 import com.kjh.dietmanagement.model.data.Food
 import com.kjh.dietmanagement.model.data.Join
 import com.kjh.dietmanagement.model.data.Login
+import com.kjh.dietmanagement.model.data.MealForm
 import com.kjh.dietmanagement.model.data.Rank
 import com.kjh.dietmanagement.model.data.ResponseFood
 import com.kjh.dietmanagement.model.data.ResponseFoods
 import com.kjh.dietmanagement.model.data.ResponseJoin
 import com.kjh.dietmanagement.model.data.ResponseLogin
+import com.kjh.dietmanagement.model.data.ResponseMealForm
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -25,6 +27,14 @@ interface ApiClient {
     // 로그인
     @POST("/user/login")
     fun loginUser(@Body login: Login): Call<ResponseLogin>
+
+    // 식단 조회
+
+    // 식단 삭제
+
+    // 식단 저장
+    @POST("/user/addmeal")
+    fun saveMeal(@Body meal: MealForm): Call<ResponseMealForm>
 
     // 음식 직접 추가
     @POST("/food/add")
