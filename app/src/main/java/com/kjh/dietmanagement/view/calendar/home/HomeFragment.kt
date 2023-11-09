@@ -95,7 +95,7 @@ class HomeFragment : Fragment() {
 
     // 월, 일, 요일을 문장으로 만들어서 반환
     private fun getWeekdayString(date: List<String>, weekDay: String): String {
-        return "${date[1]}월 ${date[2]}일 ${weekDay}요일"
+        return "${date[0]}년 ${date[1]}월 ${date[2]}일 ${weekDay}요일"
     }
 
     // 음식을 먹은 날짜에 점 표시 하는 클래스

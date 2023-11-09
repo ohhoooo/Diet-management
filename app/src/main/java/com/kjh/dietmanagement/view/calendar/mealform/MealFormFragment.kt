@@ -12,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.kjh.dietmanagement.R
 import com.kjh.dietmanagement.databinding.FragmentMealFormBinding
 import com.kjh.dietmanagement.model.data.Food
@@ -27,6 +28,8 @@ class MealFormFragment : Fragment(), OnClickInterface {
     private lateinit var binding: FragmentMealFormBinding
     private val activityViewModel: MainActivityViewModel by activityViewModels()
     private val viewModel: MealFormViewModel by viewModels { ViewModelFactory() }
+
+    private val args: MealFormFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -141,7 +144,7 @@ class MealFormFragment : Fragment(), OnClickInterface {
                     lifecycleScope.launchWhenCreated {
                         viewModel.saveMeal(
                             MealForm(
-                                "231101",
+                                args.weekday,
                                 classification,
                                 activityViewModel.food.value!!.map { it.name },
                                 etCurrentWeight.text.toString().toDouble(),

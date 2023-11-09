@@ -58,6 +58,9 @@
         android:id="@+id/mealFormFragment"
         android:name="com.kjh.dietmanagement.view.calendar.mealform.MealFormFragment"
         android:label="MealFormFragment">
+        <argument
+            android:name="weekday"
+            app:argType="string" />
         <action
             android:id="@+id/action_mealFormFragment_to_photoDialogFragment"
             app:destination="@id/photoDialogFragment" />
